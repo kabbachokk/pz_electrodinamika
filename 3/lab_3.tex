@@ -20,6 +20,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
+\usepackage{pgfplots}
+
 \def\arraystretch{1.3}%
 
 \usepackage[left=20mm, top=20mm, right=10mm, bottom=20mm, nohead, footskip=10mm]{geometry}
@@ -68,118 +70,228 @@
     \end{titlepage}
 
     \newpage
-    {\bfseries Задание 3.} Плоская ЭМВ (поляризация неизвестна) наклонно падает из диэлектрика с параметрами $ \varepsilon $ (табл. 4), $\mu=1$, $\sigma=1$ на плоскую границу раздела с вакуумом.
-    Рассчитать значение критического угла и угла Брюстера. Описать условия полного отражения и полного прохождения.
-    Построить графики зависимостей модулей коэффициентов отражения (|Г(φ)|) и преломления (|T(φ)|) от угла падения (φ=0…90º).    
+    {\bfseries Задание 3.} 
+    Плоская ЭМВ (поляризация неизвестна) наклонно падает из диэлектрика с параметрами $ \varepsilon $ (табл. 1), $\mu=1$, $\sigma=1$ на плоскую границу раздела с вакуумом.
+    \\ \indent Рассчитать значение критического угла и угла Брюстера. Описать условия полного отражения и полного прохождения.
+    \\ \indent Построить графики зависимостей модулей коэффициентов отражения $\left(\lvert \textup{Г}(φ)\lvert\right)$ и преломления $\left(\lvert \textup{T}(φ)\lvert\right)$ от угла падения $\left(\varphi=0…90^{\circ}\right)$.    
 
     \begin{table}[h!]
       \begin{center}
         \label{tab:table1}
-        \begin{tabular}{|l|l|l|l|l|l|l|}
+        \begin{tabular}{|l|l|}
           \hline
-          Вариант & $f$, МГц & $\mu$ & $\sigma$, См/м & $E_m$, В/м & $z$, мм & $m$ \\
+          Вариант & $\varepsilon$   \\
           \hline
-          $45$ & $1,2$ & $8,0$ & $1\cdot{10}^{6}$ & $1\cdot{10}^{-1}$ & $2,4$ & $5000$ \\
+          $45$    & $4,4$           \\
           \hline
         \end{tabular}
         \caption{Исходные данные.}
       \end{center}
     \end{table}
 
+    {\bfseries Решение:} 
+    \\ \indent В случае, когда ЭМВ падает из оптически более плотной среды в менее плотную, возникает явление полного отражения, если угол падения превышает критический угол. Если угол падения больше критического, то отраженная волна уносит всю энергию, принесенную падающей ЭМВ. При угле Брюстера коэффициент отражения превращается в ноль, ЭМВ полностью переходит во вторую среду.
+    \\ \indent Рассчитываем значение критического угла и угла Брюстера, при котором отраженная волна отсутствует:
+    
+    \begin{center}
+      \begin{tabular}{cc}
+        $\varphi_{\textup{кр}} = arcsin{\sqrt{\frac{\varepsilon_2\cdot\mu_2}{\varepsilon_1\cdot\mu_1}}},$   & $\varphi_{\textup{Бр}} = arctg\sqrt{\frac{\varepsilon_2}{\varepsilon_1}},$       \\
+        $\varphi_{\textup{кр}} = 28,47^{\circ};$                                                                         & $\varphi_{\textup{Бр}} = 25,49^{\circ};$                                                      \\
+      \end{tabular}
+    \end{center}
+
+    Рассчитаем угол преломления, описанный законом Снеллиуса: \\
+
+    \[ \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \]
+    \[ \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right); \]
+
     \begin{table}[h!]
       \begin{center}
         \label{tab:table2}
-        \begin{tabular}{|l|l|l|}
+        \begin{tabular}{|l|l|}
           \hline
-          $\varepsilon_0$, Ф/м & $\mu_0$, Гн/м & $Z_0$, Ом \\
+          $\varphi^\circ$ & $\psi^\circ$ \\
           \hline
-          $\frac{{10}^{-9}}{36\pi}$ & $4\pi\cdot10^{-7}$ & $120\pi$ \\
+          $0$     & $0$     \\
+          \hline
+          $5$     & $2,38$  \\
+          \hline
+          $10$    & $4,75$  \\
+          \hline
+          $15$    & $7,09$  \\
+          \hline
+          $20$    & $9,38$  \\
+          \hline
+          $25$    & $11,62$ \\
+          \hline
+          $30$    & $13,79$ \\
+          \hline
+          $35$    & $15,87$ \\
+          \hline
+          $40$    & $17,84$   \\
+          \hline
+          $45$    & $19,7$ \\
+          \hline
+          $50$    & $22,99$  \\
+          \hline
+          $55$    & $21,42$ \\
+          \hline
+          $60$    & $24,38$ \\
+          \hline
+          $65$    & $25,6$  \\
+          \hline
+          $70$    & $26,61$ \\
+          \hline
+          $75$    & $27,42$ \\
+          \hline
+          $80$    & $28$    \\
+          \hline
+          $85$    & $28,35$ \\
+          \hline
+          $90$    & $28,47$ \\
           \hline
         \end{tabular}
-        \caption{Постоянные величины.}
+        \caption{Угол по закону Снеллиуса.}
       \end{center}
     \end{table}
-    {\bfseries Решение:} \\
-    \indent Найдем тангенс потерь, для того чтобы определить классификацию среды.
-
-    \[ tg\delta=\frac{\sigma}{2\cdot\pi\cdot\varepsilon\cdot f \cdot\varepsilon_{0}}; \]
-    \[ tg\delta=1,5\cdot10^{10}; \]
-
-    Поскольку, значение $tg\delta$ находится в интервале от 10 до \infty, можно классифицировать среду как – проводник.
-    \[\omega = 2\pi\cdot f = 2\pi\cdot 1,2 \cdot 10^{6} = 7,54 \cdot 10^{6} \; \textup{рад/c};\]
-    \[\alpha=\beta=\sqrt{\pi f \sigma \mu_0 \mu} = 6,156 \cdot 10^{3} \; \textup{1/м};\]
 
     \newpage
-    Находим характеристики ЭМВ:
-    \begin{itemize}
-      \item{
-        длину волны: 
-        \[\lambda=\frac{2\pi}{\beta} = 1,02\cdot 10^{-3} \; \textup{м};\]
-      }
-      \item{
-        фазовую скорость, групповую скорость: \\
-        \[\upsilon_\textup{ф} = \frac{\omega}{\beta} = 1,225\cdot 10^{3} \; \textup{м/с}, \; \upsilon_\textup{гр} = 0\; \textup{м/с};\]
-      }
-      \item{
-        волновое сопротивление проводника:
-        \[Z_\textup{в}=\sqrt{\frac{\omega \mu_0 \mu}{\sigma}}\exp{\left(\textup{i}\frac{\pi}{4}\right)} = 0.00615+0.00615i \; \textup{Ом};\]
-      }
-      \item{
-        глубину проникновения:
-        \[\Delta^\circ = \frac{1}{\alpha} = 1,624\cdot 10^{-4} \; \textup{м};\]
-      }
-    \end{itemize}
+    Рассчитаем значения коэффициента отражения для перпендикулярной и параллельной поляризации:\\
 
-    Рассчитаем амплитуду плотности тока проводимости и смещения: \\
-    \[j_\textup{пр} = \sigma E_m = 1\cdot 10^{5} \; \textup{А/м}^{2},\]
-    \[j_\textup{см} = \frac{j_\textup{пр}}{tg\delta} = 6,667 \cdot 10^{-6} \; \textup{А/м}^{2};\]
-
-    Рассчитаем плотность потока мощности ЭМВ: \\
-    \[\textup{П}_0 = \frac{E^2_m}{2 \cdot Z_\textup{в}} = 0.40650-0.40650i \; \textup{Вт/м}^{2},\]
-    \[\textup{П}(z) = \textup{П}_0 \cdot e^{-2\cdot\alpha z} = 0 \; \textup{Вт/м}^{2};\]
-
-    Рассчитаем на каком расстоянии от начала координат амплитуда поля уменьшается в 5000 раз: \\
-    \[A = e^{\alpha z} \rightarrow m = e^{\alpha z} \rightarrow z = \frac{\ln{m}}{\alpha} = 1,384\cdot 10^{-3}\; \textup{м};\]
-    \newpage
-
-    {\bfseries Вывод: }\\
-    \indent Сравнительный анализ полупроводящей среды и проводника:
+    \[ \textup{Г}_{\perp} = \frac{\sin(\psi-\varphi)}{\sin(\psi+\varphi)}, \; \textup{Г}_{\parallel} = \frac{tg(\psi-\varphi)}{\tg(\psi+\varphi)}; \]
 
     \begin{table}[h!]
       \begin{center}
-        \label{tab:table3}
-        \begin{tabular}{|l|l|l|}
+        \label{tab:table2}
+        \begin{tabular}{|l|l|l|l|}
           \hline
-          Параметры                             & Полупроводящая среда  & Проводник             \\
+          $\varphi^\circ$ & $\psi^\circ$ & $\textup{Г}_{\perp}$ & $\textup{Г}_{\parallel}$ \\
           \hline
-          $tg\delta$                            & 0,27                  & $1,5\cdot10^{10}$     \\
+          $0$ & $0$ & $0$ & $0$ \\
           \hline
-          $\alpha$, 1/м                         & 0,193                 & $6,156 \cdot 10^{3}$  \\
+          $5$ & $2,38$ & $0,356$ & $0,353$ \\
           \hline
-          $\beta$, 1/м                          & 1,634                 & $6,156 \cdot 10^{3}$  \\
+          $10$    & $4,75$ & $0,359$ & $0,349$ \\
           \hline
-          $\lambda$, м                          & 3,845                 & $1,02\cdot 10^{-3}$   \\
+          $15$    & $7,09$ & $0,366$ & $0,342$ \\
           \hline
-          $\upsilon_\textup{ф}$, м/с            & $3,845\cdot 10^{7}$   & $1,225\cdot 10^{3}$   \\
+          $20$    & $9,38$ & $0,376$ & $0,333$ \\
           \hline
-          $\upsilon_\textup{гр}$, м/с           & $3,845\cdot 10^{7}$   & 0                     \\
+          $25$    & $11,62$ & $0,388$ & $0,32$ \\
           \hline
-          $Z_\textup{в}$, Ом                    & 47,70720-5,29937i     & 0,00615+0,00615i    \\
+          $30$    & $13,79$ & $0,403$ & $0,303$ \\
           \hline
-          $\Delta^\circ$, м                     & 5,181                 & $1,624\cdot 10^{-4}$  \\
+          $35$    & $15,87$ & $0,422$ & $0,282$ \\
           \hline
-          $j_\textup{пр}$, $\textup{А/м}^{2}$   & $18\cdot 10^{-5}$     & $1\cdot 10^{5}$       \\
+          $40$    & $4,4$ & $0,446$ & $0,256$ \\
           \hline
-          $j_\textup{см}$, $\textup{А/м}^{2}$   & $6,667 \cdot 10^{-4}$ & $6,667 \cdot 10^{-6}$ \\
+          $45$    & $17,84$ & $0,473$ & $0,223$ \\
           \hline
-          $\textup{П}(z)$, $\textup{Вт/м}^{2}$  & $6,116\cdot 10^{-9}$  & 0                     \\
+          $50$    & $19,7$ & $0,505$ & $0,183$ \\
           \hline
-          $z$, м                                & 22,013                & $1,384\cdot 10^{-3}$  \\
+          $55$    & $21,42$ & $0,542$ & $0,133$ \\
+          \hline
+          $60$    & $24,38$ & $0,585$ & $0,071$ \\
+          \hline
+          $65$    & $25,6$ & $0,635$ & $0,008$ \\
+          \hline
+          $70$    & $26,61$ & $0,692$ & $0,109$ \\
+          \hline
+          $75$    & $27,42$ & $0,756$ & $0,241$ \\
+          \hline
+          $80$    & $28$ & $0,829$ & $0,416$ \\
+          \hline
+          $85$    & $28,35$ & $0,91$ & $0,656$ \\
+          \hline
+          $90$    & $28,47$ & $1$ & $1$ \\
           \hline
         \end{tabular}
-        \caption{Сравнение параметров.}
+        \caption{Угол по закону Снеллиуса.}
+      \end{center}
+    \end{table}
+    
+    \newpage
+    Рассчитаем значения коэффициента преломления для перпендикулярной и параллельной поляризации: \\
+
+    \[ \textup{Т}_{\perp} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin(\psi+\varphi)}, \; \textup{Т}_{\parallel} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin{\left(\psi+\varphi\right)}\cdot\cos(\psi-\varphi)}; \]
+
+    \newpage
+    \begin{table}[h!]
+      \begin{center}
+        \label{tab:table2}
+        \begin{tabular}{|l|l|l|l|}
+          \hline
+          $\varphi^\circ$ & $\psi^\circ$ & $\textup{Т}_{\perp}$ & $\textup{Т}_{\parallel}$ \\
+          \hline
+          $0$ & $0$ & $0$ & $0$ \\
+          \hline
+          $5$ & $2,38$ & $0,356$ & $0,353$ \\
+          \hline
+          $10$    & $4,75$ & $0,359$ & $0,349$ \\
+          \hline
+          $15$    & $7,09$ & $0,366$ & $0,342$ \\
+          \hline
+          $20$    & $9,38$ & $0,376$ & $0,333$ \\
+          \hline
+          $25$    & $11,62$ & $0,388$ & $0,32$ \\
+          \hline
+          $30$    & $13,79$ & $0,403$ & $0,303$ \\
+          \hline
+          $35$    & $15,87$ & $0,422$ & $0,282$ \\
+          \hline
+          $40$    & $4,4$ & $0,446$ & $0,256$ \\
+          \hline
+          $45$    & $17,84$ & $0,473$ & $0,223$ \\
+          \hline
+          $50$    & $19,7$ & $0,505$ & $0,183$ \\
+          \hline
+          $55$    & $21,42$ & $0,542$ & $0,133$ \\
+          \hline
+          $60$    & $24,38$ & $0,585$ & $0,071$ \\
+          \hline
+          $65$    & $25,6$ & $0,635$ & $0,008$ \\
+          \hline
+          $70$    & $26,61$ & $0,692$ & $0,109$ \\
+          \hline
+          $75$    & $27,42$ & $0,756$ & $0,241$ \\
+          \hline
+          $80$    & $28$ & $0,829$ & $0,416$ \\
+          \hline
+          $85$    & $28,35$ & $0,91$ & $0,656$ \\
+          \hline
+          $90$    & $28,47$ & $1$ & $1$ \\
+          \hline
+        \end{tabular}
+        \caption{Угол по закону Снеллиуса.}
       \end{center}
     \end{table}
 
-    Из таблицы 3 можно увидеть, что ...
+    Построим графики зависимостей модулей коэффициентов отражения $\left(\lvert \textup{Г}(\varphi)\lvert\right)$ и преломления $\left(\lvert \textup{Г}(φ)\lvert\right)$ и преломления $\left(\lvert \textup{T}(\varphi)\lvert\right)$: \\
+    
+    \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        legend pos = north west, 
+        title = График зависимостей модулей коэффициентов отражения,
+        xlabel = {$\varphi$},
+        domain = 0:28,
+        restrict x to domain = 0:90,
+        restrict y to domain = 0:1,
+        xmin = 0,
+        ymin = 0,
+        samples = 900
+      ]
+      \legend{ 
+        $\lvert \textup{Г}_{\perp} \lvert$, 
+        $\lvert \textup{Г}_{\parallel} \lvert$
+      };
+      \addplot[blue] {
+        abs(sin(asin((sin(x)*(4.4)^(1/2))/(1^(1/2)))-x)/sin(asin((sin(x)*(4.4)^(1/2))/(1^(1/2)))+x))
+      };
+      \addplot[red] {
+        abs(tan(asin((sin(x)*4.4^0.5)/(1^0.5))-x)/tan(asin((sin(x)*4.4^0.5)/(1^0.5))+x))
+      };
+      \end{axis}
+    \end{tikzpicture}
+    \end{center}
 \end{document}
