@@ -1,6 +1,5 @@
 % !TEX program = xelatex
-\documentclass[14pt,a4paper]{scrartcl} 
-\usepackage[utf8]{inputenc}
+\documentclass[fontsize=14pt,a4paper]{scrartcl}
 \usepackage[english,russian]{babel} 
 \usepackage{fontspec} 
 \defaultfontfeatures{Ligatures={TeX},Renderer=Basic} 
@@ -76,7 +75,7 @@
     \\ \indent Рассчитать значение критического угла и угла Брюстера. Описать условия полного отражения и полного прохождения.
     \\ \indent Построить графики зависимостей модулей коэффициентов отражения $\left(\lvert \textup{Г}(φ)\lvert\right)$ и преломления $\left(\lvert \textup{T}(φ)\lvert\right)$ от угла падения $\left(\varphi=0…90^{\circ}\right)$.    
 
-    \begin{table}[h!]
+    \begin{table}[ht!]
       \begin{center}
         \label{tab:table1}
         \begin{tabular}{|l|l|}
@@ -106,7 +105,7 @@
     \[ \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \]
     \[ \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right); \]
 
-    \begin{table}[h!]
+    \begin{table}[ht!]
       \begin{center}
         \label{tab:table2}
         \begin{tabular}{|l|l|}
@@ -166,7 +165,7 @@
       \pgfplotstabletypeset[
         col sep=semicolon,
         /pgf/number format/read comma as period
-      ]{data.csv}
+      ]{data/lab_3/data.csv}
     \end{center}
     
     \newpage
@@ -210,11 +209,11 @@
       ]
       \begin{axis}[
         legend pos = north west, 
-        title = График зависимостей модулей коэффициентов отражения,
+        title = График зависимостей модулей коэффициентов преломления,
         xlabel = {$\varphi$},
-        domain = 0:28.47,
+        domain = -5:28.47,
         restrict x to domain = 0:28.47,
-        restrict y to domain = 0:1,
+        restrict y to domain = 0:10,
         xmin = 0,
         xmax = 40,
         ymin = 0,
