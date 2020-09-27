@@ -1,0 +1,87 @@
+name: Build and deploy latex sources
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # Компилируем документы
+    - name: Build documents
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: |
+          1.tex
+          2.tex
+          3.tex
+        working_directory: sources/
+        args: -file-line-error -halt-on-error -interaction=nonstopmode
+        compiler: latexmk
+        latexmk_use_xelatex: true 
+        post_compile: "latexmk -c"
+    # Загружаем собранные pdf-файлы
+    - name: Upload pdf documents
+      uses: actions/upload-artifact@v2
+      with:
+        name: docs
+        path: | 
+          sources/1.pdf
+          sources/2.pdf
+          sources/3.pdf
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [build]
+    steps:
+      - name: Variables
+        id: vars
+        run: |
+          echo «::set-output name=date::$(date +'%Y-%m-%d')»
+          echo «::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)»
+          
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: docs
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
+        with:
+          tag_name: docs-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          release_name: Работы (version ${{ steps.vars.outputs.date }})
+          draft: false
+          prerelease: false
+      # Загружаем 1 работу
+      - name: Upload pdf assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./1.pdf
+          asset_name: Работа1.pdf
+          asset_content_type: application/pdf
+      # Загружаем 2 работу
+      - name: Upload pdf assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./2.pdf
+          asset_name: Работа2.pdf
+          asset_content_type: application/pdf
+      # Загружаем 3 работу
+      - name: Upload pdf assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./3.pdf
+          asset_name: Работа3.pdf
+          asset_content_type: application/pdf
