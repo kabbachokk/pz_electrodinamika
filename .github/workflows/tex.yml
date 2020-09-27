@@ -25,9 +25,9 @@ jobs:
       with:
         name: docs
         path: | 
-          sources/1.pdf
-          sources/2.pdf
-          sources/3.pdf
+          src/1.pdf
+          src/2.pdf
+          src/3.pdf
 
   deploy:
     runs-on: ubuntu-latest
