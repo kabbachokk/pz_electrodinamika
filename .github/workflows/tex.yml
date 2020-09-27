@@ -14,7 +14,7 @@ jobs:
           1.tex
           2.tex
           3.tex
-        working_directory: sources/
+        working_directory: src/
         args: -file-line-error -halt-on-error -interaction=nonstopmode
         compiler: latexmk
         latexmk_use_xelatex: true 
