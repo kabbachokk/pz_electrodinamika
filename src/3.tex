@@ -93,67 +93,12 @@
     \\ \indent В случае, когда ЭМВ падает из оптически более плотной среды в менее плотную, возникает явление полного отражения, если угол падения превышает критический угол. Если угол падения больше критического, то отраженная волна уносит всю энергию, принесенную падающей ЭМВ. При угле Брюстера коэффициент отражения превращается в ноль, ЭМВ полностью переходит во вторую среду.
     \\ \indent Рассчитываем значение критического угла и угла Брюстера, при котором отраженная волна отсутствует:
     
-    \begin{center}
-      \begin{tabular}{cc}
-        $\varphi_{\textup{кр}} = arcsin{\sqrt{\frac{\varepsilon_2\cdot\mu_2}{\varepsilon_1\cdot\mu_1}}},$   & $\varphi_{\textup{Бр}} = arctg\sqrt{\frac{\varepsilon_2}{\varepsilon_1}},$       \\
-        $\varphi_{\textup{кр}} = 28,47^{\circ};$                                                                         & $\varphi_{\textup{Бр}} = 25,49^{\circ};$                                                      \\
-      \end{tabular}
-    \end{center}
+    \[ \varphi_{\textup{Бр}} = arctg\sqrt{\frac{\varepsilon_2}{\varepsilon_1}}, \; \varphi_{\textup{Бр}} = 25,49^{\circ}; \]
+    \[ \varphi_{\textup{кр}} = arcsin{\sqrt{\frac{\varepsilon_2\cdot\mu_2}{\varepsilon_1\cdot\mu_1}}}, \; \varphi_{\textup{кр}} = 28,47^{\circ}; \]
 
-    Рассчитаем угол преломления, описанный законом Снеллиуса: \\
+    Рассчитаем углы преломления, описанные законом Снеллиуса: \\
 
-    \[ \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \]
-    \[ \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right); \]
-
-    \begin{table}[ht!]
-      \begin{center}
-        \label{tab:table2}
-        \begin{tabular}{|l|l|}
-          \hline
-          $\varphi^\circ$ & $\psi^\circ$ \\
-          \hline
-          $0$     & $0$     \\
-          \hline
-          $5$     & $2,38$  \\
-          \hline
-          $10$    & $4,75$  \\
-          \hline
-          $15$    & $7,09$  \\
-          \hline
-          $20$    & $9,38$  \\
-          \hline
-          $25$    & $11,62$ \\
-          \hline
-          $30$    & $13,79$ \\
-          \hline
-          $35$    & $15,87$ \\
-          \hline
-          $40$    & $17,84$   \\
-          \hline
-          $45$    & $19,7$ \\
-          \hline
-          $50$    & $22,99$  \\
-          \hline
-          $55$    & $21,42$ \\
-          \hline
-          $60$    & $24,38$ \\
-          \hline
-          $65$    & $25,6$  \\
-          \hline
-          $70$    & $26,61$ \\
-          \hline
-          $75$    & $27,42$ \\
-          \hline
-          $80$    & $28$    \\
-          \hline
-          $85$    & $28,35$ \\
-          \hline
-          $90$    & $28,47$ \\
-          \hline
-        \end{tabular}
-        \caption{Угол по закону Снеллиуса.}
-      \end{center}
-    \end{table}
+    \[ \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \; \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right);\]
 
     \newpage
     Рассчитаем значения коэффициентов отражения и преломления для перпендикулярной и параллельной поляризации:\\
@@ -161,75 +106,43 @@
     \[ \textup{Г}_{\perp} = \frac{\sin(\psi-\varphi)}{\sin(\psi+\varphi)}, \; \textup{Г}_{\parallel} = \frac{\tg(\psi-\varphi)}{\tg(\psi+\varphi)}; \]
     \[ \textup{Т}_{\perp} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin(\psi+\varphi)}, \; \textup{Т}_{\parallel} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin{\left(\psi+\varphi\right)}\cdot\cos(\psi-\varphi)}; \]
 
+    \vspace{\fill}
+
+    \begin{table}[h]
     \begin{center}
+      \label{tab:table2}
       \pgfplotstabletypeset[
+        column type=l,
+        before row=\hline,every last row/.style={after row=\hline},
+        columns/a/.style={column type=|l},
+        columns/b/.style={column type=|l|},
         col sep=semicolon,
         /pgf/number format/read comma as period
       ]{data/lab_3/data.csv}
-    \end{center}
+      \caption{Сводная таблица.}
+    \end{center} 
+    \end{table}
     
+    \vspace{\fill}
+
     \newpage
-    Построим графики зависимостей модулей коэффициентов отражения $\left(\lvert \textup{Г}(\varphi)\lvert\right)$ и преломления $\left(\lvert \textup{Г}(φ)\lvert\right)$ и преломления $\left(\lvert \textup{T}(\varphi)\lvert\right)$: \\
+    Построим графики зависимостей модулей коэффициентов отражения $\left(\lvert \textup{Г}(\varphi)\lvert\right)$ и преломления $\left(\lvert \textup{T}(\varphi)\lvert\right)$: \\
     
     \begin{center}
-    \begin{tikzpicture}[
-      declare function={ 
-          psi(\x) = asin((sin(\x)*4.4^(1/2))/(1^(1/2)));
-        },
-      ]
-      \begin{axis}[
-        legend pos = north west, 
-        title = График зависимостей модулей коэффициентов отражения,
-        xlabel = {$\varphi$},
-        domain = 0:28.47,
-        restrict x to domain = 0:28.47,
-        restrict y to domain = 0:1,
-        xmin = 0,
-        xmax = 40,
-        ymin = 0,
-        ymax = 1,
-        samples = 900
-      ]
-        \legend{ 
-          $\lvert \textup{Г}_{\perp} \lvert$, 
-          $\lvert \textup{Г}_{\parallel} \lvert$
-        };
-        \addplot[blue] {
-          abs(sin(psi(x)-x)/sin(psi(x)+x))
-        };
-        \addplot[red] {
-          abs(tan(psi(x)-x)/tan(psi(x)+x))
-        };
-      \end{axis}
-    \end{tikzpicture}
-    \begin{tikzpicture}[
-      declare function={ 
-          psi(\x) = asin((sin(\x)*4.4^(1/2))/(1^(1/2))); 
-        },
-      ]
-      \begin{axis}[
-        legend pos = north west, 
-        title = График зависимостей модулей коэффициентов преломления,
-        xlabel = {$\varphi$},
-        domain = -5:28.47,
-        restrict x to domain = 0:28.47,
-        restrict y to domain = 0:10,
-        xmin = 0,
-        xmax = 40,
-        ymin = 0,
-        samples = 900
-      ]
-        \legend{ 
-          $\lvert \textup{Г}_{\perp} \lvert$, 
-          $\lvert \textup{Г}_{\parallel} \lvert$
-        };
-        \addplot[blue] {
-          (2*sin(psi(x))*sin(x))/sin(psi(x)+x)
-        };
-        \addplot[red] {
-          (2*sin(psi(x))*sin(x))/(sin(psi(x)+x)+sin(psi(x)-x))
-        };
-      \end{axis}
-    \end{tikzpicture}
+
+      \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=1]{data/lab_3/fig/Г}
+        \caption{График зависимостей модулей коэффициентов отражения}
+        \label{fig:ris1}
+      \end{figure}
+
+      \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=1]{data/lab_3/fig/Т}
+        \caption{График зависимостей модулей коэффициентов преломления}
+        \label{fig:ris2}
+      \end{figure}
+
     \end{center}
 \end{document}

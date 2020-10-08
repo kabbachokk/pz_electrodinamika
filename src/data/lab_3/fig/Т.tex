@@ -1,0 +1,59 @@
+% !TEX program = xelatex
+\documentclass{standalone}
+\usepackage[english,russian]{babel} 
+\usepackage{fontspec} 
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic} 
+\setmainfont[Ligatures=TeX]{Times New Roman}
+
+\usepackage{unicode-math}
+\unimathsetup{math-style=TeX}
+\setmathfont{Cambria Math}
+\setmathfont[range=\mathup/{num}]{Times New Roman}
+\setmathfont[range=\mathit/{greek,Greek,latin,Latin,Cyrillic,cyrillic}]{Cambria Math}
+\setmathfont[range=\mathup/{greek,Greek,latin,Latin,Cyrillic,cyrillic}]{Cambria Math}
+\setmathfont[range={"2212,"002B,"003D,"0028,"0029,"005B,
+"005D,"221A,"2211,"2248,"222B,"007C,"2026,"2202,"00D7,"0302,
+"2261,"0025,"22C5,"00B1,"2194,"21D4}]{Cambria Math}
+
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+    \begin{tikzpicture}[
+        declare function={ 
+            psi(\x) = asin((sin(\x)*4.4^(1/2))/(1^(1/2))); 
+        },
+    ]
+        \begin{axis}[
+            grid,
+            legend style={fill=white, fill opacity=0, draw opacity=0, text opacity=1},
+            xlabel = {$\varphi$},
+            domain = 0:28.475,
+            restrict y to domain = -5:5,
+            restrict x to domain = 0:28.475,
+            xmin = 0,
+            xmax = 90,
+            ymin = 0,
+            ymax = 4,
+            samples = 2847,
+            unbounded coords=jump
+        ]
+            \addlegendentry{$\lvert \textup{Т} (\varphi) \lvert$}
+            \addplot[blue, thick] {
+                (2*sin(psi(x))*cos(x))/sin(psi(x)+x)
+            }
+            node[pos=1,right,black]{$\perp$};
+
+            \addplot[red, densely dashed, thick] {
+                (2*sin(psi(x))*cos(x))/(sin(psi(x)+x)*cos(psi(x)-x))
+            }
+            node[pos=.85,left,black]{$\parallel$};
+
+            \addplot[mark=none, black, samples=2, dashed] coordinates {(28.475,4) (28.475,0)}
+            node[pos=.85,right,black]{$\varphi_\textup{кр}$};
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
