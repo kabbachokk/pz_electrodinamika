@@ -92,19 +92,19 @@
     {\bfseries Решение:} 
     \\ \indent В случае, когда ЭМВ падает из оптически более плотной среды в менее плотную, возникает явление полного отражения, если угол падения превышает критический угол. Если угол падения больше критического, то отраженная волна уносит всю энергию, принесенную падающей ЭМВ. При угле Брюстера коэффициент отражения превращается в ноль, ЭМВ полностью переходит во вторую среду.
     \\ \indent Рассчитываем значение критического угла и угла Брюстера, при котором отраженная волна отсутствует:
-    
-    \[ \varphi_{\textup{Бр}} = arctg\sqrt{\frac{\varepsilon_2}{\varepsilon_1}}, \; \varphi_{\textup{Бр}} = 25,49^{\circ}; \]
-    \[ \varphi_{\textup{кр}} = arcsin{\sqrt{\frac{\varepsilon_2\cdot\mu_2}{\varepsilon_1\cdot\mu_1}}}, \; \varphi_{\textup{кр}} = 28,47^{\circ}; \]
+    \[\varepsilon_1 = 4,4, \; \varepsilon_2 = 1\]
+    \begin{equation} \varphi_{\textup{Бр}} = arctg\sqrt{\frac{\varepsilon_2}{\varepsilon_1}}, \; \varphi_{\textup{Бр}} = 25,49^{\circ}; \end{equation}
+    \begin{equation} \varphi_{\textup{кр}} = arcsin{\sqrt{\frac{\varepsilon_2\cdot\mu_2}{\varepsilon_1\cdot\mu_1}}}, \; \varphi_{\textup{кр}} = 28,47^{\circ}; \end{equation}
 
     Рассчитаем углы преломления, описанные законом Снеллиуса: \\
 
-    \[ \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \; \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right);\]
+    \begin{equation} \frac{\sin\varphi}{\sin\psi}=\frac{\sqrt{\varepsilon_2}}{\sqrt{\varepsilon_1}}, \; \psi = arcsin\left(\frac{\sin\varphi\cdot\sqrt{\varepsilon_1}}{\sqrt{\varepsilon_2}}\right);\end{equation}
 
     \newpage
     Рассчитаем значения коэффициентов отражения и преломления для перпендикулярной и параллельной поляризации:\\
 
-    \[ \textup{Г}_{\perp} = \frac{\sin(\psi-\varphi)}{\sin(\psi+\varphi)}, \; \textup{Г}_{\parallel} = \frac{\tg(\psi-\varphi)}{\tg(\psi+\varphi)}; \]
-    \[ \textup{Т}_{\perp} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin(\psi+\varphi)}, \; \textup{Т}_{\parallel} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin{\left(\psi+\varphi\right)}\cdot\cos(\psi-\varphi)}; \]
+    \begin{equation} \textup{Г}_{\perp} = \frac{\sin(\psi-\varphi)}{\sin(\psi+\varphi)}, \; \textup{Г}_{\parallel} = \frac{\tg(\psi-\varphi)}{\tg(\psi+\varphi)}; \end{equation}
+    \begin{equation} \textup{Т}_{\perp} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin(\psi+\varphi)}, \; \textup{Т}_{\parallel} = \frac{2\cdot\sin\psi\cdot\cos\varphi}{\sin{\left(\psi+\varphi\right)}\cdot\cos(\psi-\varphi)}; \end{equation}
 
     \vspace{\fill}
 
@@ -114,12 +114,34 @@
       \pgfplotstabletypeset[
         column type=l,
         before row=\hline,every last row/.style={after row=\hline},
-        columns/a/.style={column type=|l},
-        columns/b/.style={column type=|l|},
+        columns/fi/.style={
+          column type=|l|,
+          column name={$\varphi$},
+        },
+        columns/psi/.style={
+          column type=l|,
+          column name={$\psi$},
+        },
+        columns/G1/.style={
+          column type=l|,
+          column name={$\textup{Г}_{\perp}$},
+        },
+        columns/G2/.style={
+          column type=l|,
+          column name={$\textup{Г}_{\parallel}$},
+        },
+        columns/T1/.style={
+          column type=l|,
+          column name={$\textup{Т}_{\perp}$},
+        },
+        columns/T2/.style={
+          column type=l|,
+          column name={$\textup{Т}_{\parallel}$},
+        },
         col sep=semicolon,
         /pgf/number format/read comma as period
       ]{data/lab_3/data.csv}
-      \caption{Сводная таблица.}
+      \caption{Коэффициенты отражения и преломления для перпендику­лярной и параллельной поляризации.}
     \end{center} 
     \end{table}
     
